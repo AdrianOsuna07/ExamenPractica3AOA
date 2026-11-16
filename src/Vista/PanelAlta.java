@@ -4,19 +4,26 @@
  */
 package Vista;
 
+import Controlador.listaCoche;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aosun
  */
 public class PanelAlta extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelAlta
-     */
+    private listaCoche controlador;
+    
     public PanelAlta() {
         initComponents();
     }
-
+    
+    public void setControlador(listaCoche controlador){
+        this.controlador = controlador;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,38 +33,107 @@ public class PanelAlta extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        matriculaLabel = new javax.swing.JLabel();
+        matriculaText = new javax.swing.JTextField();
+        fecMatriLabel = new javax.swing.JLabel();
+        fecMatriText = new javax.swing.JTextField();
+        precioLabel = new javax.swing.JLabel();
+        precioText = new javax.swing.JTextField();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
-        jLabel1.setText("Matricula");
+        matriculaLabel.setText("Matricula:");
 
-        jTextField1.setText("jTextField1");
+        fecMatriLabel.setText("FechaMatricula:");
+
+        precioLabel.setText("Precio:");
+
+        jToggleButton1.setText("Guardar");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                .addGap(92, 92, 92)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(matriculaLabel)
+                    .addComponent(fecMatriLabel)
+                    .addComponent(precioLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(matriculaText)
+                    .addComponent(fecMatriText)
+                    .addComponent(precioText, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
+                .addGap(78, 78, 78))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(jToggleButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(matriculaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(matriculaLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fecMatriLabel)
+                    .addComponent(fecMatriText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(precioLabel)
+                    .addComponent(precioText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addComponent(jToggleButton1)
+                .addContainerGap(98, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        try {
+            // 1. Recoger y convertir los datos de las cajas de texto
+            String matricula = matriculaText.getText();
+            float precio = Float.parseFloat(precioText.getText());
+            LocalDate fechaMatricula = LocalDate.parse(fecMatriText.getText()); 
+
+            // 2. Comprobar que el controlador está conectado e invocar el método de añadir
+            if (controlador != null) {
+                // Pasamos un JLabel temporal nulo o creamos un JLabel vacío auxiliar para que no falle el método antiguo si lo requiere, 
+                // o podemos añadir un método al controlador que no pida JLabel.
+                // Como el controlador pide un JLabel para el validador, le pasamos uno nuevo vacío o un JLabel temporal.
+                javax.swing.JLabel lblDummy = new javax.swing.JLabel(); 
+                
+                boolean exito = controlador.añadirCoche(matricula, fechaMatricula, precio, lblDummy);
+                
+                if (exito) {
+                    JOptionPane.showMessageDialog(this, "¡Coche añadido con éxito!");
+                    matriculaText.setText("");
+                    precioText.setText("");
+                    fecMatriText.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, lblDummy.getText(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Error: Formato de fecha incorrecto. Usa el formato AAAA-MM-DD.", "Error de fecha", JOptionPane.ERROR_MESSAGE);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel fecMatriLabel;
+    private javax.swing.JTextField fecMatriText;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel matriculaLabel;
+    private javax.swing.JTextField matriculaText;
+    private javax.swing.JLabel precioLabel;
+    private javax.swing.JTextField precioText;
     // End of variables declaration//GEN-END:variables
 }

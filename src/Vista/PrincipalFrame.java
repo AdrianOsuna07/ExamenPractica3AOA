@@ -11,13 +11,16 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PrincipalFrame.class.getName());
     private listaCoche listaCoche;
     private PanelVisualizar panelVer;
+    private PanelAlta panelAlta;
     
     public PrincipalFrame() {
         initComponents();
         listaCoche = new listaCoche();
         panelVer = new PanelVisualizar();
+        panelAlta = new PanelAlta();
         
         panelVer.setControlador(listaCoche);
+        panelAlta.setControlador(listaCoche);
     }
 
     /**
@@ -67,6 +70,11 @@ public class PrincipalFrame extends javax.swing.JFrame {
         Menu.add(Visualizar);
 
         Nuevo.setText("Nuevo");
+        Nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NuevoActionPerformed(evt);
+            }
+        });
         Menu.add(Nuevo);
 
         jMenuBar1.add(Menu);
@@ -120,6 +128,12 @@ public class PrincipalFrame extends javax.swing.JFrame {
         this.setContentPane(panelVer);
         this.pack();        // TODO add your handling code here:
     }//GEN-LAST:event_VisualizarActionPerformed
+
+    private void NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoActionPerformed
+        // TODO add your handling code here:
+        this.setContentPane(panelAlta);
+        this.pack();
+    }//GEN-LAST:event_NuevoActionPerformed
 
     /**
      * @param args the command line arguments

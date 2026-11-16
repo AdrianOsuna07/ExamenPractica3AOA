@@ -74,8 +74,8 @@ public class listaCoche {
                 return false;
             }
 
-            if (precio < 0 || precio > 150.000) {
-                mostrarError(lblMensaje, "Error: Los puntos deben estar entre 0 y 1000.");
+            if (precio < 0 || precio > 150000) {
+                mostrarError(lblMensaje, "Error: El precio debe estar entre 0 y 150000.");
                 return false;
             }
 
