@@ -62,7 +62,19 @@ public class listaCoche {
             indice = lista.size() - 1;
             return true;
         }
+        
         return false;
+    }
+    
+    public void removerCocheActual(){
+        lista.remove(indice);
+        if(indice == 0){
+            indice++;
+        }else{
+            indice--;
+        }
+        
+        
     }
     
     public static class ControlDeErrores{

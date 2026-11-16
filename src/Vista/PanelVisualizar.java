@@ -31,14 +31,14 @@ public class PanelVisualizar extends javax.swing.JPanel {
             Coche c = controlador.obtenerCocheActual();
             if (c != null) {
                 indiceText.setText(String.valueOf(controlador.getIndice()));
-                matriculaText.setText(c.getMatricula());
                 precioText.setText(String.valueOf(c.getPrecio()));
+                matriculaText.setText(c.getMatricula());
                 fechaMatriText.setText(c.getFechaMatricula()!= null ? c.getFechaMatricula().toString() : "");
             } else {
                 // Si la lista está vacía
                 indiceText.setText("");
-                matriculaText.setText("");
                 precioText.setText("");
+                matriculaText.setText("");
                 fechaMatriText.setText("");
             }
         }
@@ -58,13 +58,14 @@ public class PanelVisualizar extends javax.swing.JPanel {
         fechMatricLabel = new javax.swing.JLabel();
         precioLabel = new javax.swing.JLabel();
         indiceText = new javax.swing.JTextField();
-        matriculaText = new javax.swing.JTextField();
         precioText = new javax.swing.JTextField();
+        matriculaText = new javax.swing.JTextField();
         fechaMatriText = new javax.swing.JTextField();
         atras = new javax.swing.JToggleButton();
         adelante = new javax.swing.JToggleButton();
         primer = new javax.swing.JToggleButton();
         ultimo = new javax.swing.JToggleButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         indiceLabel.setText("Indice:");
 
@@ -74,9 +75,9 @@ public class PanelVisualizar extends javax.swing.JPanel {
 
         precioLabel.setText("Precio:");
 
-        matriculaText.addActionListener(new java.awt.event.ActionListener() {
+        precioText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                matriculaTextActionPerformed(evt);
+                precioTextActionPerformed(evt);
             }
         });
 
@@ -108,6 +109,13 @@ public class PanelVisualizar extends javax.swing.JPanel {
             }
         });
 
+        jToggleButton1.setText("BorrarCocheActual");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,11 +126,11 @@ public class PanelVisualizar extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(precioLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(matriculaText, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(precioText, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(matriculaLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(precioText, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(matriculaText, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(indiceLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -149,6 +157,10 @@ public class PanelVisualizar extends javax.swing.JPanel {
                                 .addGap(70, 70, 70)
                                 .addComponent(ultimo)))))
                 .addGap(56, 56, 56))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToggleButton1)
+                .addGap(141, 141, 141))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,11 +172,11 @@ public class PanelVisualizar extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(matriculaLabel)
-                    .addComponent(precioText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(matriculaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(precioLabel)
-                    .addComponent(matriculaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(precioText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fechMatricLabel)
@@ -177,13 +189,15 @@ public class PanelVisualizar extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(primer)
                     .addComponent(ultimo))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jToggleButton1)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void matriculaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaTextActionPerformed
+    private void precioTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_matriculaTextActionPerformed
+    }//GEN-LAST:event_precioTextActionPerformed
 
     private void adelanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adelanteActionPerformed
         controlador.avanzar();
@@ -205,6 +219,11 @@ public class PanelVisualizar extends javax.swing.JPanel {
         mostrarCocheActual();        // TODO add your handling code here:
     }//GEN-LAST:event_ultimoActionPerformed
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        controlador.removerCocheActual();
+        mostrarCocheActual();        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton adelante;
@@ -213,6 +232,7 @@ public class PanelVisualizar extends javax.swing.JPanel {
     private javax.swing.JTextField fechaMatriText;
     private javax.swing.JLabel indiceLabel;
     private javax.swing.JTextField indiceText;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel matriculaLabel;
     private javax.swing.JTextField matriculaText;
     private javax.swing.JLabel precioLabel;
