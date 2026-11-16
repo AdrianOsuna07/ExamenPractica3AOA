@@ -12,13 +12,21 @@ public class listaCoche {
     public listaCoche() {
         this.lista = new ArrayList<>();
         this.indice = 0;
+        
+        lista.add(new Coche("1234ABC", LocalDate.of(1995, 5, 12),2000));
+        lista.add(new Coche("1234CBA", LocalDate.of(1997, 11, 23),1000));
+        lista.add(new Coche("1234ABC", LocalDate.of(2005, 2, 8),4000));
     }
     
-    public boolean esVacia(){
+    public int getIndice(){
+        return indice;
+    }
+    
+    public int esVacia(){
        if (lista.isEmpty()){
-           return true;
+           return -1;
        }
-       return false;
+       return lista.size();
     }
     public void avanzar(){
         if (indice < lista.size() - 1) {
